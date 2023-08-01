@@ -3,22 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof (Rigidbody2D))]
+[RequireComponent(typeof (Animator))]
 public class Player : MonoBehaviour {
     public float SPEED;
     public int MAX_HEALTH;
     private float input;
     private Rigidbody2D rigidBody;
+    private Animator animator;
     private int health;
     private Vector3 START_POS;
 
     void Start() {
         this.rigidBody = GetComponent<Rigidbody2D>();
-        this.health = MAX_HEALTH;
+        this.animator = GetComponent<Animator>();
+        this.health = this.MAX_HEALTH;
         this.START_POS = this.transform.position;
     }
 
     void Update() {
         this.input = Input.GetAxisRaw("Horizontal");
+
+        this.animator.SetBool("isRunning", this.input != 0);
+
+        if (this.input < 0) {
+            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+        } else if (this.input != 0) {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     void FixedUpdate() {
@@ -31,10 +42,14 @@ public class Player : MonoBehaviour {
         this.gameObject.SetActive(true);
     }
     
-    public void Damage(int damage) {
-        this.health -= damage;
+    public void Damage() {
+        this.health--;
         if (this.health <= 0) {
-            GameManager.get().GameOver();
+            GameManager.Get().GameOver();
         }
+    }
+
+    public int GetHealth() {
+        return this.health;
     }
 }

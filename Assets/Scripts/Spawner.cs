@@ -8,9 +8,12 @@ public class Spawner : MonoBehaviour {
     private float MIN_X = -11.5f;
     private float MAX_X = 11.5f;
     private float timer;
+    private bool spawning = true;
     public GameObject enemy;
-    
+
     void Update() {
+        if (!this.spawning) return;
+
         if (this.timer >= this.SPAWN_TIME) {
             float x = Random.Range(this.MIN_X, this.MAX_X);
             Instantiate(this.enemy, new Vector3(x, this.SPAWN_HEIGHT, 0), Quaternion.identity);
@@ -18,5 +21,13 @@ public class Spawner : MonoBehaviour {
         } else {
             this.timer += Time.deltaTime;
         }
+    }
+    
+    public void Stop() {
+        this.spawning = false;
+    }
+
+    public void Reset() {
+        this.spawning = true;
     }
 }
