@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SPEED: 5
-  MAX_HEALTH: 3
+  MAX_HEALTH: 5
 --- !u!50 &628296851
 Rigidbody2D:
   serializedVersion: 4
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 476340157}
   heartsCanvas: {fileID: 386034260}
   spawner: {fileID: 1682351463}
-  heart: {fileID: 4542988078491098907, guid: e89bcb3298dca4949a09db50e123e109, type: 3}
+  heart: {fileID: 651918740283561322, guid: e89bcb3298dca4949a09db50e123e109, type: 3}
 --- !u!4 &1694015875
 Transform:
   m_ObjectHideFlags: 0

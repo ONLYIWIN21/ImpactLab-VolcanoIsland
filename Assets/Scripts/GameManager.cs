@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     private static GameManager _instance = null;
@@ -20,14 +21,15 @@ public class GameManager : MonoBehaviour {
     public Canvas gameOverCanvas;
     public Canvas heartsCanvas;
     public Spawner spawner;
-    public GameObject heart;
-    private GameObject[] hearts;
+    public Image heart;
+    private Image[] hearts;
 
     void Start() {
-        this.hearts = new GameObject[this.player.MAX_HEALTH];
+        this.hearts = new Image[this.player.MAX_HEALTH];
         float y = this.heartsCanvas.transform.position.y;
         for (int i = 0; i < this.hearts.Length; i++) {
-            this.hearts[i] = Instantiate(this.heart, new Vector3(10 + 70 * i, 0, 0), Quaternion.identity, this.heartsCanvas.transform);
+            this.hearts[i] = Instantiate(this.heart, Vector3.zero, Quaternion.identity, this.heartsCanvas.transform);
+            this.hearts[i].rectTransform.anchoredPosition = new Vector3(10 + 70 * i, -10, 0);
         }
     }
     
